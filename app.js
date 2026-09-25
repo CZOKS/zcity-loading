@@ -12,7 +12,7 @@ function sourceFailed(){clearTimer();sourceIndex++;loadSource();}
 function next(){if(!list.length){noVideo('Видео ещё не добавлены в плейлист.');return;}if(!order.length)shuffle();if(!order.length){noVideo('Не удалось открыть видео. Попробуй переподключиться позже.');return;}current=order.pop();sourceIndex=0;$('counter').textContent=(current+1)+' / '+list.length;say(list[current].title||'MADNESS TV');loadSource();}
 function setList(items){clearTimer();v.pause();v.removeAttribute('src');v.load();list=[];for(var i=0;i<items.length;i++){var item=items[i],sources=item.sources||[];sources=sources.filter(safeSource);if(sources.length)list.push({title:item.title||'Видео '+(i+1),sources:sources});}order=[];failed={};current=-1;next();}
 function updateVolume(){$('volume').value=Math.round(v.volume*100);$('volumeValue').textContent=(v.muted?'0':Math.round(v.volume*100))+'%';$('mute').textContent=v.muted?'Без звука':'Звук';$('mute').setAttribute('aria-label',v.muted?'Включить звук':'Выключить звук');}
-v.volume=.5;
+v.volume=.3;
 $('volume').oninput=function(){volumeTouched=true;v.volume=Number(this.value)/100;v.muted=v.volume===0;updateVolume();try{localStorage.setItem('madness-volume',v.volume);}catch(e){}};
 $('mute').onclick=function(){volumeTouched=true;v.muted=!v.muted;updateVolume();if(list.length)tryPlay();};
 $('enable').onclick=function(){clearTimer();v.muted=false;updateVolume();this.hidden=true;tryPlay();};
