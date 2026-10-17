@@ -1,0 +1,130 @@
+/* Morph v25.3: the game's four released palettes, adapted for a loading page.
+   No GLua or gameplay state is executed here. */
+:root {
+  --bg: #020b10; --panel: #061720; --paper: #061923; --ink: #e2f1f2;
+  --text: #e2f1f2; --muted: #9ec0c4; --accent: #3fb6c8; --red: var(--accent);
+  --line: #234552; --deep: #03141d; --wash: #0b3a48; --on-accent: #03141d;
+  --scene: url('assets/realm-abyss.svg');
+}
+body[data-theme="forest"] {
+  --bg: #040a07; --panel: #0d1a12; --paper: #0c1912; --ink: #e6eed9;
+  --text: #e6eed9; --muted: #aabd9b; --accent: #8bcb5e; --line: #34523b;
+  --deep: #07110b; --wash: #1e4a26; --on-accent: #08120a;
+  --scene: url('assets/realm-forest.svg');
+}
+body[data-theme="void"] {
+  --bg: #07060c; --panel: #0d0b16; --paper: #0b0914; --ink: #e6e0f2;
+  --text: #e6e0f2; --muted: #b2a3cb; --accent: #b09bed; --line: #493961;
+  --deep: #08070e; --wash: #34264f; --on-accent: #07060c;
+  --scene: url('assets/realm-void.svg');
+}
+body[data-theme="boykisser"] {
+  --bg: #fff5f8; --panel: #fffafd; --paper: #ffffff; --ink: #292027;
+  --text: #292027; --muted: #71545f; --accent: #ab365b; --line: #e3b0c0;
+  --deep: #fff1f6; --wash: #f9d5e1; --on-accent: #ffffff;
+  --scene: repeating-linear-gradient(90deg, #fff6f9 0, #fff6f9 24px, #ffe2ed 24px, #ffe2ed 48px);
+}
+html { background: #020b10; }
+body { --red: var(--accent); color: var(--text); background: var(--bg); }
+body::before { background: none; }
+.realm-background { position: fixed; left: 0; right: 0; bottom: 0; height: 52vh; background: var(--scene) center bottom / cover no-repeat; opacity: .38; pointer-events: none; animation: sea-drift 24s ease-in-out infinite alternate; }
+.site-shell { max-width: 1600px; height: auto; min-height: 100vh; grid-template-rows: auto auto minmax(360px,1fr) auto; padding: 24px 4vw 22px; gap: 24px; }
+.header { border-color: var(--line); padding-bottom: 16px; }
+.header img, .poster img { filter: grayscale(1); }
+.header-note, .connection, .divider { color: var(--muted); }
+.connection .signal { box-shadow: 0 0 0 4px var(--wash); }
+.eyebrow { color: var(--muted); font-size: 10px; letter-spacing: 2.1px; }
+h1 { font-size: clamp(90px, 12vw, 164px); text-shadow: 4px 4px 0 var(--wash); line-height: .86; }
+.masthead { align-items: center; gap: 24px; }
+.masthead-aside { width: 360px; border: 0; padding: 0; }
+.edition { font-size: 27px; letter-spacing: 3px; }
+.intro { color: var(--muted); font-size: 13px; margin: 9px 0 15px; }
+.theme-picker { display: flex; flex-wrap: wrap; gap: 5px; }
+.theme-picker button { padding: 8px 9px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font: 10px 'Courier New',monospace; }
+.theme-picker button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.theme-picker button:hover { border-color: var(--accent); }
+main { grid-template-columns: minmax(0,1fr) 300px; gap: 24px; }
+.cinema { border: 1px solid var(--line); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--line); }
+.cinema::before { width: 84px; background: var(--accent); }
+.cinema-top, .player-bottom { background: var(--panel); border-color: var(--line); }
+.cinema-top { height: 39px; }
+.channel-note { color: var(--muted); border-color: var(--line); }
+#counter, #mediaStatus, .controls button, .controls output { color: var(--muted); }
+.screen { min-height: 240px; }
+.poster { background: var(--deep); }
+.poster-grid { opacity: .35; background: var(--scene) center / cover; animation: sea-drift 16s ease-in-out infinite alternate; }
+.poster > span { color: var(--text); }
+.poster img { width: 64px; height: 64px; }
+.enable { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: bold; }
+.enable:hover { background: var(--text); color: var(--bg); }
+.controls input { background: var(--line); height: 4px; }
+.server-panel { position: relative; background: var(--paper); border: 1px solid var(--line); padding: 16px 20px; overflow: visible; }
+.realm-preview { height: 84px; flex: none; background: var(--scene) center / cover; margin: -16px -20px 16px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.realm-coordinate { position: absolute; bottom: 8px; left: 12px; padding: 4px 6px; background: var(--deep); color: var(--muted); font: 8px 'Courier New',monospace; letter-spacing: 2px; }
+.cat-avatar { display: none; width: 154px; height: 113px; background: url('fastdl/materials/morph/ui/boykisser/bk_avatar.png') -158px -117px no-repeat; position: absolute; right: 7px; top: 0; transform: scale(.75); transform-origin: top right; }
+body[data-theme="boykisser"] .cat-avatar { display: block; }
+.panel-top { color: var(--muted); letter-spacing: 1.5px; }
+.panel-arrow { color: var(--accent); font-size: 20px; }
+h2 { font-size: 25px; margin: 12px 0; }
+.server-format span { color: var(--muted); border-color: var(--line); }
+.server-format span:last-child { color: var(--accent); border-color: var(--line); }
+.server-info { border-color: var(--line); margin: 14px 0; }
+.server-info > div { margin: 10px 0; }
+dt, .address-label { color: var(--muted); }
+dd { color: var(--text); }
+#copyIp { color: var(--text); background: var(--deep); border-color: var(--line); font-size: 12px; padding: 12px 10px; }
+#copyIp svg { color: var(--accent); }
+#copyIp:hover { background: var(--wash); border-color: var(--accent); }
+.copy-status { color: var(--muted); }
+.discord { color: var(--text); border-color: var(--line); padding: 11px 0; }
+.discord:hover, .discord span { color: var(--accent); }
+.panel-signature { flex-wrap: wrap; align-items: flex-start; gap: 10px; border-color: var(--line); }
+.panel-signature > span:first-child { font: 8px/1.5 'Courier New',monospace; color: var(--muted); }
+#motion { padding: 0; border: 0; background: transparent; font: 9px/1.5 'Courier New',monospace; color: var(--muted); text-decoration: underline; }
+#motion:disabled { cursor: default; text-decoration: none; }
+.download { border: 1px solid var(--line); background: var(--panel); padding: 17px 20px 14px; }
+.loader { border-color: var(--line); border-top-color: var(--accent); }
+.progress { height: 6px; background: var(--wash); }
+.loading-details { color: var(--muted); }
+.bottom, .bottom strong { color: var(--muted); }
+.bottom { margin-top: 16px; }
+body[data-theme="boykisser"] h1 { text-shadow: 4px 4px 0 #efb0c7; }
+body[data-motion="paused"] *, body[data-motion="paused"] *::before, body[data-motion="paused"] *::after { animation-play-state: paused !important; }
+@keyframes sea-drift { from { transform: scale(1.04) translateX(-.6%); } to { transform: scale(1.04) translateX(.6%); } }
+@media (min-width: 1051px) and (max-height: 820px) {
+  .site-shell { gap: 18px; padding-top: 18px; grid-template-rows: auto auto minmax(320px,1fr) auto; }
+  h1 { font-size: 110px; }.eyebrow { font-size: 9px; }.intro { margin: 7px 0 10px; }
+  .realm-preview { height: 48px; margin-bottom: 10px; }
+  .server-panel { padding: 12px 18px; }.realm-preview { margin-top: -12px; margin-left: -18px; margin-right: -18px; }
+  .server-info { margin: 10px 0; }.server-info > div { margin: 8px 0; }
+  .panel-signature { margin-top: 7px; padding-top: 7px; }
+  .download { padding: 12px 16px; }
+}
+@media (max-width: 1050px) {
+  .site-shell { padding: 24px; grid-template-rows: auto auto auto auto; }
+  .masthead-aside { width: 320px; }h1 { font-size: clamp(80px,11vw,112px); }
+  main { grid-template-columns: minmax(0,1fr) 270px; gap: 22px; }
+  .realm-preview { height: 64px; }.server-panel { padding: 16px 18px; }
+  .realm-preview { margin-left: -18px; margin-right: -18px; }
+}
+@media (max-width: 760px) {
+  .site-shell { padding: 20px; gap: 24px; }
+  .masthead { align-items: stretch; gap: 18px; }h1 { font-size: clamp(90px,22vw,145px); }
+  .masthead-aside { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .intro { margin: 0; text-align: right; }.theme-picker { grid-column: 1/-1; }
+  .theme-picker button { flex: 1; padding: 10px 5px; }
+  main { grid-template-columns: minmax(0,1fr); }
+  .screen { min-height: 0; }
+  .server-panel { display: flex; padding: 18px; }
+  .realm-preview { margin: -18px -18px 15px; height: 100px; }
+  .server-info { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 8px 0; }
+  .server-info > div { flex-direction: row; align-items: baseline; margin: 8px 0; }
+  dd { text-align: right; }.panel-actions { border: 0; padding: 0; margin-top: 0; }
+  #copyIp { max-width: none; }.download { padding: 15px; }
+}
+@media (max-width: 420px) {
+  .site-shell { padding: 16px; }.eyebrow { letter-spacing: 1px; font-size: 8px; }
+  h1 { font-size: clamp(78px,23vw,96px); }.edition { font-size: 23px; }
+  .theme-picker { gap: 4px; }.theme-picker button { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .poster-grid { animation: none; } }
